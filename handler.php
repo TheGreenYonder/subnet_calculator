@@ -124,17 +124,19 @@ if ($valid){
 
 				for ($k = 0; $k < 4; $k++) {
 					$arr[$i][$k] = bindec(substr($bin_ip[$i+1][0], $offset, 8));
+					$broad[$i][$k] = bindec(substr($bin_ip[$i+1][1], $offset, 8));
 					$offset = $offset + 8;
 				}
 	
-			$nmbrs[$i] = implode(".", $arr[$i]) . "/" . strval(32-$hostanteil[$i]);
-	
+				$nmbrs[$i] = implode(".", $arr[$i]) . "/" . strval(32-$hostanteil[$i]);
+				$brc_n[$i] = implode(".", $broad[$i]) . "/" . strval(32-$hostanteil[$i]);
 			}
 
-			echo "<table width = \"600\" border = 1>
+			echo "<table width = \"800\" border = 1>
 					<tr>	<th>Subnetze</th>
 							<th>Hosts</th>
 							<th>Anzahl</th>
+							<th>Broadcast</th>
 							<th>Binär</th>	</tr>";
 			
 			for ($i = 0, $cnt = count($nmbrs); $i < $cnt; $i++) {
@@ -145,6 +147,7 @@ if ($valid){
 				echo "<tr>	<td align = \"center\">{$nmbrs[$i]}</td>
 							<td align = \"center\">{$host[0]} - {$host[1]}</td>
 							<td align = \"center\">{$anzahl}</td>
+							<td align = \"center\">{$brc_n[$i]}</td>
 							<td align = \"center\">{$bin_ip[$i+1][0]}</td>";
 			}
 	
