@@ -1,12 +1,15 @@
 <?php
-$ip = $_POST['ip'];
-$sub = $_POST['sub'];
+if (isset($_POST)) {
+    $ip = $_POST['ip'];
+    $sub = $_POST['sub'];
 
-#regex searches for 1-3 digits between . and 1-2 digits after /
-$re = '/(^\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\/(\d{1,2}$)/';
+    $re = '/(^\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\/(\d{1,2}$)/';
 
-#if regex fails to match, $valid is 0 = false
-$valid = preg_match_all($re, $ip, $matches);
+    #if regex fails to match, $valid is 0 = false
+    $valid = preg_match_all($re, $ip, $matches);
+} else {
+    $valid = 0;
+}
 
 if ($valid){
 	#array to store every octet as int - preg_match_all returns 2D array to $matches
@@ -15,7 +18,7 @@ if ($valid){
 				intval($matches[3][0]),
 				intval($matches[4][0]),
 		"mask" => intval($matches[5][0]),
-	];
+    ];
 
 	#check if any octet is not between 0 - 255
 	for($i = 0, $size = count($address) -1; $i < $size; ++$i) {
@@ -38,7 +41,7 @@ if ($valid){
 			if (preg_match("/\D+/", $hosts[$i]) || $hosts[$i] == "") {
 				$valid = 0;
 			} else if ($valid){
-				$hostanteil[$i] = intval(ceil(log(floatval($hosts[$i] + 2), 2)));
+                $hostanteil[$i] = intval(ceil(log(floatval($hosts[$i] + 2), 2)));
 				$hosts[$i] = intval(pow(2, $hostanteil[$i]));			
 			}
 		}
