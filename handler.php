@@ -153,7 +153,6 @@ if ($valid){
 							<td align = \"center\">{$brc_n[$i]}</td>
 							<td align = \"center\">{$bin_ip[$i+1][0]}</td> </tr>";
 			}
-	
 			echo "</table>";
 		}
 	} 
