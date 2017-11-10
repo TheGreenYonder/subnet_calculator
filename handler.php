@@ -151,7 +151,7 @@ if ($valid){
 							<td align = \"center\">{$host[0]} - {$host[1]}</td>
 							<td align = \"center\">{$anzahl}</td>
 							<td align = \"center\">{$brc_n[$i]}</td>
-							<td align = \"center\">{$bin_ip[$i+1][0]}</td>";
+							<td align = \"center\">{$bin_ip[$i+1][0]}</td> </tr>";
 			}
 	
 			echo "</table>";
